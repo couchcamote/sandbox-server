@@ -1,0 +1,35 @@
+mongod --auth --port 27017 --dbpath /Users/alexies/workspace/_DATA_/mongo_db/
+
+mongod  --auth --port 27017 --dbpath /Users/alexies/workspace/_DATA_/mongo_db/
+
+mongo --port 27017 -u "user1" -p "password" --authenticationDatabase "admin"
+
+
+
+# defaultUser
+use admin
+db.createUser(
+  {
+    user: "user",
+    pwd: "password",
+    roles: [ 
+      { role: "readWrite", db: "admin" },
+      { role: "readWrite", db: "sandbox" }
+      ]
+  }
+)
+
+
+#Create Admin User
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "password",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+
+
+db.location.createIndex( { location : "2dsphere" } )
+
